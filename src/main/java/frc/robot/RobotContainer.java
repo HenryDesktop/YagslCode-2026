@@ -33,6 +33,9 @@ public class RobotContainer {
                                                                                               driverXbox::getRightY)
                                                             .headingWhile(true);
 
+                                                            SwerveInputStream driveRobotOriented = driveAngularVelocity.copy().robotRelative(true)
+                                                             .allianceRelativeControl(false);
+
 
                                                             SwerveInputStream driveAngularVelocityKeyboard = SwerveInputStream.of(drivebase.getSwerveDrive(),
                                                                         () -> -driverXbox.getLeftY(),

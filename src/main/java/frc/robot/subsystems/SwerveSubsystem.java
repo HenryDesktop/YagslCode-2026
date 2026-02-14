@@ -45,7 +45,11 @@ public class SwerveSubsystem extends SubsystemBase {
       {
         throw new RuntimeException(e);
       }
-      swerveDrive.setModuleEncoderAutoSynchronize(true, 1);
+      swerveDrive.setHeadingCorrection(false);
+      swerveDrive.setCosineCompensator(true); // DISABLE IF YOU ARE IN SIMULATION.
+      // swerveDrive.setAngularVelocityCompensation(true,
+      //   true,
+      //   0.1);
     
     }
 

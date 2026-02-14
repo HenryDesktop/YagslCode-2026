@@ -9,7 +9,7 @@ public final class Constants {
   }
   
   public static class SwerveConstants {
-    public static final double maximumSpeed = Units.feetToMeters(7.5);
+    public static final double maximumSpeed = Units.feetToMeters(7);
     public static final double deadband = 0.1;
 
   }
