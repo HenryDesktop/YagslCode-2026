@@ -28,18 +28,20 @@ public class SwerveSubsystem extends SubsystemBase {
   SwerveDrive swerveDrive;
   public SwerveSubsystem() {
 
-      boolean blueAlliance = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue;
-          Pose2d startingPose = blueAlliance ? new Pose2d(new Translation2d(Meter.of(1),
-                                                                            Meter.of(4)),
-                                                          Rotation2d.fromDegrees(0))
-                                            : new Pose2d(new Translation2d(Meter.of(16),
-                                                                            Meter.of(4)),
-                                                          Rotation2d.fromDegrees(180));
-          SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
+      // boolean blueAlliance = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue;
+      //     Pose2d startingPose = blueAlliance ? new Pose2d(new Translation2d(Meter.of(1),
+      //                                                                       Meter.of(4)),
+      //                                                     Rotation2d.fromDegrees(0))
+      //                                       : new Pose2d(new Translation2d(Meter.of(16),
+      //                                                                       Meter.of(4)),
+      //                                                     Rotation2d.fromDegrees(180));
+      //     SwerveDriveTelemetry.verbosity = TelemetryVerbosity.HIGH;
   
       try
       {
-        swerveDrive = new SwerveParser(directory).createSwerveDrive(SwerveConstants.maximumSpeed, startingPose);
+        swerveDrive = new SwerveParser(directory).createSwerveDrive(SwerveConstants.maximumSpeed, new Pose2d(new Translation2d(Meter.of(1),
+                                                                                                                                    Meter.of(4)),
+                                                                                                                                          Rotation2d.fromDegrees(0)));
 
       } catch (Exception e)
       {
