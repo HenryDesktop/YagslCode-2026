@@ -9,13 +9,16 @@ import java.util.function.Supplier;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 import frc.robot.Constants.SwerveConstants;
 import swervelib.SwerveDrive;
 import swervelib.parser.SwerveParser;
@@ -26,6 +29,7 @@ public class SwerveSubsystem extends SubsystemBase {
   
   File directory = new File(Filesystem.getDeployDirectory(), "swerve");
   SwerveDrive swerveDrive;
+
   public SwerveSubsystem() {
 
       // boolean blueAlliance = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Blue;
@@ -47,16 +51,24 @@ public class SwerveSubsystem extends SubsystemBase {
       {
         throw new RuntimeException(e);
       }
+
+      if (Robot.isSimulation()){
       swerveDrive.setHeadingCorrection(false);
-      swerveDrive.setCosineCompensator(true); // DISABLE IF YOU ARE IN SIMULATION.
-      // swerveDrive.setAngularVelocityCompensation(true,
-      //   true,
-      //   0.1);
-    
+      swerveDrive.setCosineCompensator(false);
+      }
+    }
+    public void resetHeading(double remplaceHeading){
+        swerveDrive.setGyro(new Rotation3d(Rotation2d.fromDegrees(remplaceHeading)));
+        swerveDrive.resetOdometry(new Pose2d(swerveDrive.getPose().getX(), swerveDrive.getPose().getY(), Rotation2d.fromDegrees(remplaceHeading)));
     }
 
   @Override
   public void periodic() {
+    SmartDashboard.putNumber("DesearedState", SwerveDriveTelemetry.desiredStates[1]);
+    SmartDashboard.putNumber("DesearedState", SwerveDriveTelemetry.desiredStates[2]);
+    SmartDashboard.putNumber("DesearedState", SwerveDriveTelemetry.desiredStates[3]);
+    SmartDashboard.putNumber("DesearedState", SwerveDriveTelemetry.desiredStates[4]);
+
   }
 
   public SwerveDrive getSwerveDrive() {
