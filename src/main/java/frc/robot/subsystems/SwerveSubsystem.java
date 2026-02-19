@@ -47,7 +47,7 @@ public class SwerveSubsystem extends SubsystemBase {
                                                                                                                                     Meter.of(4)),
                                                                                                                                           Rotation2d.fromDegrees(0)));
         swerveDrive.resetDriveEncoders();
-        swerveDrive.setModuleEncoderAutoSynchronize(true, 1);
+        // swerveDrive.setModuleEncoderAutoSynchronize(true, 1);
       } catch (Exception e)
       {
         throw new RuntimeException(e);
