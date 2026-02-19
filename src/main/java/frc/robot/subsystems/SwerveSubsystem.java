@@ -46,7 +46,8 @@ public class SwerveSubsystem extends SubsystemBase {
         swerveDrive = new SwerveParser(directory).createSwerveDrive(SwerveConstants.maximumSpeed, new Pose2d(new Translation2d(Meter.of(1),
                                                                                                                                     Meter.of(4)),
                                                                                                                                           Rotation2d.fromDegrees(0)));
-
+        swerveDrive.resetDriveEncoders();
+        swerveDrive.setModuleEncoderAutoSynchronize(true, 1);
       } catch (Exception e)
       {
         throw new RuntimeException(e);
@@ -64,10 +65,10 @@ public class SwerveSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
-    SmartDashboard.putNumber("DesearedState", SwerveDriveTelemetry.desiredStates[1]);
-    SmartDashboard.putNumber("DesearedState", SwerveDriveTelemetry.desiredStates[2]);
-    SmartDashboard.putNumber("DesearedState", SwerveDriveTelemetry.desiredStates[3]);
-    SmartDashboard.putNumber("DesearedState", SwerveDriveTelemetry.desiredStates[4]);
+    SmartDashboard.putNumber("Angle Absolute 1", swerveDrive.getStates()[0].angle.getDegrees());
+    SmartDashboard.putNumber("Angle Absolute 2", swerveDrive.getStates()[1].angle.getDegrees());
+    SmartDashboard.putNumber("Angle Absolute 3", swerveDrive.getStates()[2].angle.getDegrees());
+    SmartDashboard.putNumber("Angle Absolute 4", swerveDrive.getStates()[3].angle.getDegrees());
 
   }
 
